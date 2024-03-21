@@ -17,16 +17,13 @@ ext {
   junitVersion = '5.10.0'
 }
 
-sourceCompatibility = '11'
-targetCompatibility = '11'
-
-tasks.withType(JavaCompile) {
+tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8'
 }
 
 application {
-  mainModule = 'org.demo.texteditorwithai'
-  mainClass = 'org.demo.texteditorwithai.HelloApplication'
+  mainModule = 'org.hse.texteditorwithai'
+  mainClass = 'org.hse.texteditorwithai.HelloApplication'
 }
 
 javafx {
@@ -41,13 +38,14 @@ dependencies {
   }
   implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
   implementation( 'org.fxmisc.richtext:richtextfx:0.11.0')
+  implementation('org.xerial:sqlite-jdbc:3.32.3.3')
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 test {
-useJUnitPlatform()}
+  useJUnitPlatform()}
 
 jlink {
   imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
